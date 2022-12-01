@@ -7,10 +7,12 @@ library(tidyverse)
 
 
 
-setwd("C:/Juv_vib")
-dir()
-all.summary <- read.csv("animal.summary.csv", header = T)
-head(all.summary)
+#setwd("C:/Juv_vib")
+#dir()
+#all.summary <- read.csv("animal.summary.csv", header = T)
+#head(all.summary)
+
+all.summary <- read.csv("data/raw/animal.summary.csv")
 
 # Tidy data
 all.summary <- all.summary %>% filter(id!="dec") %>% droplevels() 
