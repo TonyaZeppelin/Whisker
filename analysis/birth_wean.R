@@ -9,12 +9,10 @@ library(here)
 
 
 # Isotope data
-dat <- read.csv(here('Data', 'derived', "dat_Brost.csv"))
-# head(dat)
+dat_proc <- read.csv(here('Data', 'derived', "dat_Brost.csv"))
 
-dat <- dat %>% filter(length_class=="long") %>% arrange(id,segment_percentile)
+dat <- dat_proc %>% filter(length_class=="long") %>% arrange(id,segment_percentile)
 # head(dat)
-#all3 <- all3 %>% arrange(id, midpoint.pctle)
 
 # Locations where first derivative is zero - output from long_analysis.R
 zeros <- read.csv("results/id_zeros_Brost.csv")
@@ -27,12 +25,11 @@ harvest <- read.csv("data/raw/all.csv")
 harvest <- harvest %>% rename("collection_date"=collection.date) %>% select(id,collection_date) %>%
   distinct() %>% mutate(collection_date=as.Date(collection_date,format="%m/%d/%Y"))
 
-
 ###
 ### Estimate birth dates from pup vibrissae
 ###
 
-# Figure
+# Figure - pup
 dat %>% filter(age_class=="pup") %>%
   ggplot(aes(x=segment_percentile,y=d15N)) + 
   facet_wrap(~id) +
