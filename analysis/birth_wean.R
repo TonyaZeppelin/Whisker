@@ -1,4 +1,4 @@
-rm(list=ls())
+# rm(list=ls())
 # setwd("/Users/brian.brost/Documents/sandbox/zeppelin/vibrissae")
 
 # source("data.setup.R")
@@ -84,10 +84,10 @@ dat_sum <- dat_sum %>% mutate(id=as.numeric(id)) %>% arrange(id) %>%
 # 	mutate(across(where(is.double),\(x) round(x,2))) %>%
 # 	mutate(age=round(age))	 
 
-#ajw addition June 2025
+#ajw addition June 2025; updated from 120 to 180 2/2026
 #assume mean birth date of July 9th(?)
-diu <- 120  # assumed number of days whisker growth in utero 
-birth_mean_120p <- dat_sum %>% 
+diu <- 180  # assumed number of days whisker growth in utero 
+birth_mean_180p <- dat_sum %>% 
   # mutate(birth_date=collection_date-(1-birth_percentile)*(diu/birth_percentile)) %>%
   mutate(birth_date = as.Date("2015-07-09")) %>%
   mutate(age=collection_date-birth_date,
@@ -121,7 +121,7 @@ birth_mean_90p <- dat_sum %>%
 # write.csv(birth_120,"results/birth_dates_120.csv",row.names=FALSE)
 
 write.csv(birth_mean_90p,"results/birth_dates_mean_90p.csv",row.names=FALSE)
-write.csv(birth_mean_120p,"results/birth_dates_mean_120p.csv",row.names=FALSE)
+write.csv(birth_mean_180p,"results/birth_dates_mean_180p.csv",row.names=FALSE)
 
 ######age-2
 ggplot(dat %>% filter(id %in% c('T17', 'T3', 'T5')),
