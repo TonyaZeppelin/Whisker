@@ -170,8 +170,8 @@ dat_sum2 <- dat_sum2 %>% #mutate(id=as.numeric(id)) %>% arrange(id) %>%
 
 #ajw addition June, November 2025
 #assume mean birth date of July 9th
-diu <- 120  # assumed number of days whisker growth in utero 
-birth_mean_120 <- dat_sum2 %>% 
+diu <- 180  # assumed number of days whisker growth in utero 
+birth_mean_180 <- dat_sum2 %>% 
   # mutate(birth_date=collection_date-(1-birth_percentile)*(diu/birth_percentile)) %>%
   mutate(birth_date = as.Date("2012-07-09")) %>%
   #growth rates
@@ -185,7 +185,7 @@ birth_mean_120 <- dat_sum2 %>%
   mutate(across(where(is.double),\(x) round(x,2))) %>%
   mutate(age=round(age))
 
-wean_days_120 <- birth_mean_120 %>%
+wean_days_180 <- birth_mean_180 %>%
   merge(dat_sum2 %>% dplyr::select(-c(fit, fit.x)), by = c('id', 'whisker_length')) %>%
   #percent of whisker grown from birth to wean peak
   transform(mm_birth_to_wean = (segment_percentile.y-birth_percentile.y)*whisker_length) %>%
@@ -210,7 +210,7 @@ wean_days_90 <- birth_mean_90 %>%
   transform(days_birth_to_wean = mm_birth_to_wean/post_utero_growth_rate)
 
 write.csv(birth_mean_90,"results/birth_dates_mean_90j.csv",row.names=FALSE)
-write.csv(birth_mean_120,"results/birth_dates_mean_120j.csv",row.names=FALSE)
+write.csv(birth_mean_180,"results/birth_dates_mean_180j.csv",row.names=FALSE)
 
 # Old code...
 # birth <- zeros %>% filter(isotope=="d15N",age_n==0,id!=13) %>% 
